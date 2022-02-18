@@ -1,0 +1,32 @@
+<div class="text-center d-flex align-items-center justify-content-center vh-100" style="padding-top:40px;padding-bottom:40px;background-color: #f5f5f5;">
+	<main class="form-signin">
+		<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <h1 class="h3 mb-3 fw-normal">Please sign Up</h1>
+    <%= render "devise/shared/error_messages", resource: resource %>
+
+    <div class="field form-floating">
+      <%= f.email_field :email, autofocus: true, autocomplete: "email" ,id: :floatingInputsue, class:'form-control', placeholder: 'name@example.com' %>
+      <%= f.label :email, 'Email Address', for:'floatingInputsue' %>
+    </div>
+
+    <div class="field form-floating">
+      <%= f.password_field :password, autocomplete: "new-password", id: :floatingPasswordsup, class:'form-control', placeholder: 'Password' %>
+      <%= f.label :password, 'Password', for:'floatingInputsup' %>
+      <% if @minimum_password_length %>
+      <em>(<%= @minimum_password_length %> characters minimum)</em>
+      <% end %>
+    </div>
+
+    <div class="field form-floating">
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", id: :floatingPasswordsucp, class:'form-control', placeholder: 'Confirm Password'%>
+      <%= f.label :password_confirmation, 'Confirm Password', for:'floatingPasswordsucp'%>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Sign up", class:'w-100 btn btn-primary'%>
+    </div>
+    <p class="mt-5 mb-3 text-muted"><%= render "devise/shared/links" %></p>
+  <% end %>
+	</main>
+</div>
+

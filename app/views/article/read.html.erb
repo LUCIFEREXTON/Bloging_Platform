@@ -12,7 +12,7 @@
 				<%=@article.body%>
 			</p>
 		</div>
-		<%if loggedin && @article.user_id.to_i == current_user.id.to_i %>
+		<%if user_signed_in? && @article.user_id.to_i == current_user.id.to_i %>
 			<div class="container row">
 				<div class="row col-6">
 					<button class="btn btn-primary col-6" data-bs-toggle="modal" data-bs-target="#u_a_modal">
@@ -24,7 +24,7 @@
   	<%end%>
 	</div>
 </div>
-<%if loggedin && @article.user_id.to_i == current_user.id.to_i %>
+<%if user_signed_in? && @article.user_id.to_i == current_user.id.to_i %>
 	<div class="modal fade" id="u_a_modal" tabindex="-1" aria-labelledby="u_a_ModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-fullscreen">
 			<div class="modal-content">

@@ -1,4 +1,5 @@
 class ArticleController < ApplicationController
+	before_action :authenticate_user!
 	def create
 		article = Article.new(article_params)
 		if article.save

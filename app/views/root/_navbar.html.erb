@@ -12,19 +12,19 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/">Home</a>
         </li>
-			<%if loggedin%>
+			<%if user_signed_in?%>
 				<li class="nav-item">
-          <a class="nav-link" href="/logout">Logout</a>
+					<%= link_to 'Logout', destroy_user_session_path, class:nav-link, :method => :delete, data: {:confirm => "You sure?" }%>
 				</li>
 				<li class="nav-item">
           <div class="nav-link" data-bs-toggle="modal" data-bs-target='#c_a_modal' >Post Article</div>
 				</li>
 			<%else%>
 				<li class="nav-item">
-          <a class="nav-link" href="/signin">Sign In</a>
+          <%= link_to 'Sign In', new_user_session_path, class:'nav-link' %>
 				</li>
 				<li class="nav-item">
-          <a class="nav-link" href="/signup">Sign Up</a>
+					<%= link_to 'Sign Up', new_user_registration_path, class:'nav-link' %>
 				</li>
 			<%end%>
       </ul>
@@ -35,7 +35,7 @@
     </div>
   </div>
 </nav>
-<%if loggedin%>
+<%if user_signed_in?%>
 <div class="modal fade" id="c_a_modal" tabindex="-1" aria-labelledby="c_a_ModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-fullscreen">
 		<div class="modal-content">

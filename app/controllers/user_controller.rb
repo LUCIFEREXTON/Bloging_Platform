@@ -35,7 +35,7 @@ class UserController < ApplicationController
 	end
 
 	def allowed
-		redirect_to root_path if loggedin
+		redirect_to root_path if user_signed_in?
 	end
 
 	private
