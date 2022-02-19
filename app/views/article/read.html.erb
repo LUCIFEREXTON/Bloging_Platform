@@ -1,0 +1,55 @@
+<%=link_to :Back, '/', class:"text-decoration-none text-primary position-fixed top-5 start-5 fw-bolder fs-1"%>
+<div class='container w-75'>
+	<div class='card'>
+		<div class='card-body'>
+			<h1 class='card-title'>
+				<%=@article.title%>
+			</h1>
+			<h3 class='card-subtitle mb-2 text-muted'>
+				<%=@article.created_at%>
+			</h3>
+			<p class="card-text">
+				<%=@article.body%>
+			</p>
+		</div>
+		<%if user_signed_in? && @article.user_id.to_i == current_user.id.to_i %>
+			<div class="container row">
+				<div class="row col-6">
+					<button class="btn btn-primary col-6" data-bs-toggle="modal" data-bs-target="#u_a_modal">
+						Edit
+					</button>
+					<%= link_to :Delete,"/delete_article/#{@article.id}", class:'btn btn-danger col-6'%>
+				</div>
+			</div>
+  	<%end%>
+	</div>
+</div>
+<%if user_signed_in? && @article.user_id.to_i == current_user.id.to_i %>
+	<div class="modal fade" id="u_a_modal" tabindex="-1" aria-labelledby="u_a_ModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-fullscreen">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="u_a_ModalLabel">Modal title</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<%=form_with model:@article,url:"/update_article/#{@article.id}" do |f|%>
+				<div class="modal-body container">
+						<div class="row mb-1">
+							<%=f.label :title, class:'form-label', for:'floatingInputValue'%>
+							<%=f.text_field :title, id:'floatingInputValue', class:'form-control'%>
+						</div>
+            <div class="row mb-1">
+							<%=f.label :body, class:'form-label', for:'floatingInputValue'%>
+							<%=f.text_area :body, id:'floatingInputValue', class:'form-control h-auto'%>
+						</div>
+						<%=f.hidden_field :user_id, value:current_user.id%>
+				</div>
+				<div class="modal-footer">
+					<%=f.submit 'Save Changes', class:'btn btn-primary'%>
+					<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+				</div>
+				<%end%>
+			</div>
+		</div>
+	</div>
+<%end%>

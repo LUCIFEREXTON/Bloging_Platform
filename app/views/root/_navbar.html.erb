@@ -1,0 +1,66 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+		<a class="navbar-brand" href="/">
+      <img src="/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="30" height="24" class="d-inline-block align-text-top">
+      Blog
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/">Home</a>
+        </li>
+			<%if user_signed_in?%>
+				<li class="nav-item">
+					<%= link_to 'Logout', destroy_user_session_path, class:nav-link, :method => :delete, data: {:confirm => "You sure?" }%>
+				</li>
+				<li class="nav-item">
+          <div class="nav-link" data-bs-toggle="modal" data-bs-target='#c_a_modal' >Post Article</div>
+				</li>
+			<%else%>
+				<li class="nav-item">
+          <%= link_to 'Sign In', new_user_session_path, class:'nav-link' %>
+				</li>
+				<li class="nav-item">
+					<%= link_to 'Sign Up', new_user_registration_path, class:'nav-link' %>
+				</li>
+			<%end%>
+      </ul>
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+<%if user_signed_in?%>
+<div class="modal fade" id="c_a_modal" tabindex="-1" aria-labelledby="c_a_ModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-fullscreen">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="c_a_ModalLabel">Modal title</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<%=form_with model:article,url:"/create_article" do |f|%>
+			<div class="modal-body container">
+					<div class="row mb-1">
+						<%=f.label :title, class:'form-label', for:'floatingInputValue'%>
+						<%=f.text_field :title, id:'floatingInputValue', class:'form-control', maxlength:200%>
+					</div>
+					<div class="row mb-1">
+						<%=f.label :body, class:'form-label', for:'floatingInputValue'%>
+						<%=f.text_area :body, id:'floatingInputValue', class:'form-control h-100',size:'100x15'%>
+					</div>
+					<%=f.hidden_field :user_id, value:current_user.id%>
+			</div>
+			<div class="modal-footer">
+				<%=f.submit 'Save Changes', class:'btn btn-primary'%>
+				<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+			</div>
+			<%end%>
+		</div>
+	</div>
+</div>
+<%end%>
