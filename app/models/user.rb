@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   
-  has_many :articles, class_name: "article", foreign_key: "reference_id"
+  has_many :articles, class_name: "Article", foreign_key: "reference_id"
 
   before_save :make_password_digest
 
