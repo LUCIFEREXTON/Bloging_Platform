@@ -1,0 +1,16 @@
+development:
+  clients:
+    default:
+      uri: "${Rails.application.credentials[:mongouri]}"
+      options:
+        server_selection_timeout: 5
+test:
+  clients:
+    default:
+      database: bloging_platform_test
+      hosts:
+        - localhost:27017
+      options:
+        read:
+          mode: :primary
+        max_pool_size: 1

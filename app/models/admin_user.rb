@@ -1,4 +1,12 @@
-class AdminUser < ApplicationRecord
+class AdminUser
+  include Mongoid::Document
+  field :email, type: String
+  field :encrypted_password, type: String
+  field :provider, type: String
+  field :uid, type: String
+  field :reset_password_token, type: String
+  field :reset_password_sent_at, type: DateTime
+  field :remember_created_at, type: DateTime
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, 
