@@ -1,0 +1,10 @@
+<%= render 'navbar', article: @article%>
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
+<div class='container w-75'>
+	<%if @articles%>
+		<%@articles.each do |article|%>
+			<%=render 'article', article: article %>
+		<%end%>
+	<%end%>
+</div>

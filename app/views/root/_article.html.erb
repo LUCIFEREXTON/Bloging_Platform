@@ -1,0 +1,7 @@
+<div class= "card" >
+	<div class= "card-body" >
+		<h5 class= "card-title" ><%= article.title %></h5>
+		<p class= "card-text" style= "text-overflow:ellipsis;overflow:hidden;white-space:nowrap;" ><%= article.body %></p>
+		<%= link_to 'See Full Article', "/read_article/#{ article.id }", class: 'btn btn-primary' %>
+	</div>
+</div>
